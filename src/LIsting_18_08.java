@@ -12,8 +12,7 @@ public class LIsting_18_08 {
     }
 
     // The method for finding the solution to move n disks from fromTower to toTower with auxTower
-    public static void moveDisks(int n, char fromTower, char toTower, char auxTower){
-        if (n == 1) // Stopping condition
+    public static void moveDisks(int n, char fromTower, char toTower, char auxTower){ if (n == 1) // Stopping condition
             System.out.println("Move disk " + n  + " from " + fromTower + " to " + toTower);
         else {
             moveDisks(n - 1, fromTower, auxTower, toTower);
