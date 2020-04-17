@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Exercise_18_10 {
+public class Exercise_18_15 {
     private static int count = 0;
 
     public static void main(String[] args) {
@@ -13,14 +13,15 @@ public class Exercise_18_10 {
     }
 
     public static int count(String str, char a){
-        if (str.length() <= 0)
-            return count;
-        else {
-            if (str.charAt(0) == a){
-                count++;
-            }
-            String newString = str.substring(1);
-            return count(newString, a);
+        return count(str, a, 0);
+    }
+
+    public static int count(String str, char a, int high){
+        if (high < str.length()){
+            int match = str.toLowerCase().charAt(high) == Character.toLowerCase(a) ? 1 : 0;
+            return match + count(str, a, high + 1);
         }
+        else
+            return 0;
     }
 }
