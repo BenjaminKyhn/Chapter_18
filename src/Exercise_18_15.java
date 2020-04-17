@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 public class Exercise_18_15 {
-    private static int count = 0;
-
     public static void main(String[] args) {
         System.out.println("Enter a string:");
         Scanner input = new Scanner(System.in);
