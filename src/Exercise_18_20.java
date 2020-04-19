@@ -37,8 +37,6 @@ public class Exercise_18_20 extends Application {
         borderPane.setCenter(pane);
         borderPane.setBottom(hBox);
 
-        pane.paint();
-
         // Create a scene and place it in the stage
         Scene scene = new Scene(borderPane, 200, 210);
         stage.setTitle("Circle");
@@ -76,12 +74,9 @@ public class Exercise_18_20 extends Application {
         }
 
         private void displayCircles(int order, double x, double y) {
-            if (order < 0) {
-                return;
-            }
-            else {
+          if (order > 0) {
                 // Draw a circle from the center point
-                Circle circle = new Circle(x, y,20 + (order * 20));
+                Circle circle = new Circle(x, y, (order * 20));
                 circle.setStroke(Color.BLACK);
                 circle.setFill(Color.TRANSPARENT);
 
