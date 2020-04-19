@@ -76,7 +76,7 @@ public class Exercise_18_20 extends Application {
         private void displayCircles(int order, double x, double y) {
           if (order > 0) {
                 // Draw a circle from the center point
-                Circle circle = new Circle(x, y, (order * 20));
+                Circle circle = new Circle(x, y, (order * 10));
                 circle.setStroke(Color.BLACK);
                 circle.setFill(Color.TRANSPARENT);
 
