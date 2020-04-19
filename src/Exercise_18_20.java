@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,13 +6,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class Exercise_18_19 extends Application {
+public class Exercise_18_20 extends Application {
     @Override
     public void start(Stage stage) {
-        SierpinskyTrianglePane pane = new SierpinskyTrianglePane();
+        CirclePane pane = new CirclePane();
 
         Button btDown = new Button("-");
         Button btUp = new Button("+");
@@ -29,7 +28,7 @@ public class Exercise_18_19 extends Application {
             pane.paint();
         });
 
-        // Pane to hold label, text field, and a button
+        // Pane to hold label, text field, and two buttons
         HBox hBox = new HBox(10);
         hBox.getChildren().addAll(btDown, btUp);
         hBox.setAlignment(Pos.CENTER);
@@ -38,9 +37,11 @@ public class Exercise_18_19 extends Application {
         borderPane.setCenter(pane);
         borderPane.setBottom(hBox);
 
+        pane.paint();
+
         // Create a scene and place it in the stage
         Scene scene = new Scene(borderPane, 200, 210);
-        stage.setTitle("SierpinskyTriangle");
+        stage.setTitle("Circle");
         stage.setScene(scene);
         stage.show();
 
@@ -48,8 +49,8 @@ public class Exercise_18_19 extends Application {
         pane.heightProperty().addListener(ov -> pane.paint());
     }
 
-    // Pane for displaying triangles
-    static class SierpinskyTrianglePane extends Pane {
+    // Pane for displaying circles
+    static class CirclePane extends Pane {
         private int order = 0;
 
         // Set a new order
@@ -63,39 +64,31 @@ public class Exercise_18_19 extends Application {
             return order;
         }
 
-        SierpinskyTrianglePane() {
+        CirclePane() {
         }
 
         protected void paint() {
-            // Select three points in proportion to the pane size
-            Point2D p1 = new Point2D(getWidth() / 2, 10);
-            Point2D p2 = new Point2D(10, getHeight() - 10);
-            Point2D p3 = new Point2D(getWidth() - 10, getHeight() - 10);
+            double x = getWidth() / 2;
+            double y = getHeight() / 2;
 
             this.getChildren().clear(); // Clear the pane before redisplay
-
-            displayTriangles(order, p1, p2, p3);
+            displayCircles(order, x, y);
         }
 
-        private void displayTriangles(int order, Point2D p1, Point2D p2, Point2D p3) {
-            if (order == 0) {
-                // Draw a triangle to connect three points
-                Polygon triangle = new Polygon();
-                triangle.getPoints().addAll(p1.getX(), p1.getY(), p2.getX(), p2.getY(), p3.getX(), p3.getY());
-                triangle.setStroke(Color.BLACK);
-                triangle.setFill(Color.WHITE);
+        private void displayCircles(int order, double x, double y) {
+            if (order < 0) {
+                return;
+            }
+            else {
+                // Draw a circle from the center point
+                Circle circle = new Circle(x, y,20 + (order * 20));
+                circle.setStroke(Color.BLACK);
+                circle.setFill(Color.TRANSPARENT);
 
-                this.getChildren().add(triangle);
-            } else {
-                // Get the midpoint on each edge in the triangle
-                Point2D p12 = p1.midpoint(p2);
-                Point2D p23 = p2.midpoint(p3);
-                Point2D p31 = p3.midpoint(p1);
+                this.getChildren().add(circle);
 
-                // Recursively display three triangles
-                displayTriangles(order - 1, p1, p12, p31);
-                displayTriangles(order - 1, p12, p2, p23);
-                displayTriangles(order - 1, p31, p23, p3);
+                // Recursively display circles
+                displayCircles(order - 1, x, y);
             }
         }
     }
